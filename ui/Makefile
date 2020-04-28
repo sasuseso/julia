@@ -89,7 +89,7 @@ ifeq ($(OS),WINNT)
 define rel_path_entry
 TEXT(\"$$(echo $(call rel_path,$(build_libexecdir),$(1)) | sed -e 's_/_\\\\_g')\")
 endef
-CPPFLAGS_PATH = -DPATH_ENTRIES="$(call rel_path_entry,$(CSL_SHLIBDIR)), $(call rel_path_entry,$(LIBLLVM_SHLIBDIR))"
+CPPFLAGS_PATH = -DPATH_ENTRIES="$(call rel_path_entry,$(build_shlibdir))"
 define julia_exe_path
 -DJULIA_EXE_PATH="\"$$(echo '$(libexecdir_rel)$(PATHSEP)$(1)' | sed -e 's_\\_\\\\_g')\""
 endef
