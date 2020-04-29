@@ -61,3 +61,14 @@ using Test
         shred!(s2)
     end
 end
+
+@testset "write! past data size" begin
+    sb = SecretBuffer(sizehint=2)
+    bits = typemax(UInt8)
+    write(sb, bits)
+    write(sb, bits)
+    write(sb, bits)
+    seek(sb, 0)
+    @test read(sb, String) == "\xff\xff\xff"
+    shred!(sb)
+end
